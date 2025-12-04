@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/medicina",
+      "destination": "/digital.faculdadesiriolibanes.org.br/medicina.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/digital.faculdadesiriolibanes.org.br/index-1.html",
+      "permanent": false
+    },
+    {
+      "source": "/profissionais",
+      "destination": "/digital.faculdadesiriolibanes.org.br/profissionais.html",
+      "permanent": false
+    },
+    {
+      "source": "/gestao",
+      "destination": "/digital.faculdadesiriolibanes.org.br/gestao.html",
+      "permanent": false
+    }
+  ]
+}
