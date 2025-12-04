@@ -349,21 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Validações Step 2
-    nomeStep2.addEventListener('input', () => {
-        if (validateName(nomeStep2.value)) {
-            markValid('nome-step2');
-            clearError('nome-step2');
-        }
-        checkStep2Form();
-    });
-    
-    sobrenomeStep2.addEventListener('input', () => {
-        if (validateName(sobrenomeStep2.value)) {
-            markValid('sobrenome-step2');
-            clearError('sobrenome-step2');
-        }
-        checkStep2Form();
-    });
+
     
     cpfStep2.addEventListener('blur', () => {
         if (!validateCPF(cpfStep2.value)) {
@@ -371,14 +357,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    function checkStep2Form() {
-        const isValid = 
-            validateName(nomeStep2.value) &&
-            validateName(sobrenomeStep2.value) &&
-            validateCPF(cpfStep2.value);
-        
-        pixBtn.disabled = !isValid;
-    }
+function checkStep2Form() {
+    const isValid = validateCPF(cpfStep2.value);
+    pixBtn.disabled = !isValid;
+}
+
     
     // Sistema de Cupom
     const couponField = document.getElementById('coupon-field');
@@ -479,18 +462,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gerar PIX
     pixBtn.addEventListener('click', async () => {
         // Validar campos Step 2
-        let hasError = false;
-        
-        if (!validateName(nomeStep2.value)) {
-            showError('nome-step2');
-            hasError = true;
-        }
-        
-        if (!validateName(sobrenomeStep2.value)) {
-            showError('sobrenome-step2');
-            hasError = true;
-        }
-        
+        let hasError = false;        
+
         if (!validateCPF(cpfStep2.value)) {
             showError('cpf-step2');
             hasError = true;
