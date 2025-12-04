@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 items: [{
-                    title: "Inteligência Artificial e Ciência De Dados Em Saúde",
+                    title: "Especialização - Inteligência Artificial e Ciência De Dados Em Saúde",
                     quantity: 1,
                     unitPrice: toCents(formData.valorFinal || ORIGINAL_PRICE),
                     tangible: false
