@@ -324,7 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.getElementById('nome-step2').value = primeiroNome;
         document.getElementById('sobrenome-step2').value = sobrenome;
-        document.getElementById('cpf-step2').value = formData.cpf;
+        document.getElementById('cpf-step2').value = formData.cpf.trim();
+checkStep2Form();
         
         goToStep(2);
     });
