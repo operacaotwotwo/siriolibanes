@@ -2895,5 +2895,28 @@ var hsVars = {
     <div class="image-whatsapp" style="background-image: url('https://digital.faculdadesiriolibanes.org.br/hubfs/whatsapp%20%281%29%20%281%29%201-1.png')"></div>
 </a>
 </div>
-  
+  <script>
+document.querySelectorAll(".filter-button").forEach(button => {
+  button.addEventListener("click", () => {
+    const slug = button.getAttribute("data-base-url");
+    const link = document.getElementById("view-all-courses-link");
+
+    if (slug && link) {
+      link.href = `/${slug}.html`;
+    }
+  });
+});
+
+// Atualiza no carregamento inicial (caso a aba "Médicos" já venha ativa)
+window.addEventListener("DOMContentLoaded", () => {
+  const active = document.querySelector(".filter-button.active");
+  const link = document.getElementById("view-all-courses-link");
+
+  if (active && link) {
+    const slug = active.getAttribute("data-base-url");
+    link.href = `/${slug}.html`;
+  }
+});
+</script>
+
 </body></html>
