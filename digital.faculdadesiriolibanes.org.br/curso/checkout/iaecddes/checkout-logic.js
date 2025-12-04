@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Enviando dados para API:', payload);
             
             // Chamar backend
-            const response = await fetch('../api/pix.js', {
+            const response = await fetch('./api/pix.js', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
