@@ -6,15 +6,15 @@
     },
     {
       "source": "/medicina",
-      "destination": "/digital.faculdadesiriolibanes.org.br/medicina.html"
+      "destination": "/medicina.html"
     },
     {
       "source": "/profissionais",
-      "destination": "/digital.faculdadesiriolibanes.org.br/profissionais.html"
+      "destination": "/profissionais.html"
     },
     {
       "source": "/gestao",
-      "destination": "/digital.faculdadesiriolibanes.org.br/gestao.html"
+      "destination": "/gestao.html"
     }
   ]
 }
