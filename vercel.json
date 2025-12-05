@@ -19,11 +19,6 @@
       "source": "/gestao",
       "destination": "/digital.faculdadesiriolibanes.org.br/gestao.html",
       "permanent": false
-    },
-    {
-      "source": "/api/pix",
-      "destination": "/digital.faculdadesiriolibanes.org.br/curso/checkout/api/pix.js",
-      "permanent": false
     }
   ]
 }
