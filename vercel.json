@@ -1,29 +1,26 @@
 {
-  "redirects": [
-    {
-      "source": "/medicina",
-      "destination": "/digital.faculdadesiriolibanes.org.br/medicina.html",
-      "permanent": false
-    },
-    {
-      "source": "/profissionais",
-      "destination": "/digital.faculdadesiriolibanes.org.br/profissionais.html",
-      "permanent": false
-    },
-    {
-      "source": "/gestao",
-      "destination": "/digital.faculdadesiriolibanes.org.br/gestao.html",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/",
-      "destination": "/digital.faculdadesiriolibanes.org.br/index-1.html"
+      "destination": "/digital.faculdadesiriolibanes.org.br/index-1.htm"
     },
     {
-      "source": "/:path*",
-      "destination": "/digital.faculdadesiriolibanes.org.br/:path*"
+      "source": "/medicina",
+      "destination": "/digital.faculdadesiriolibanes.org.br/medicina.html"
+    },
+    {
+      "source": "/profissionais",
+      "destination": "/digital.faculdadesiriolibanes.org.br/profissionais.html"
+    },
+    {
+      "source": "/gestao",
+      "destination": "/digital.faculdadesiriolibanes.org.br/gestao.html"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     }
   ]
 }
