@@ -22,7 +22,7 @@
     },
     {
       "source": "/api/pix",
-      "destination": "/digital.faculdadesiriolibanes.org.br/cursos/checkout/api/pix.js",
+      "destination": "/digital.faculdadesiriolibanes.org.br/curso/checkout/api/pix.js",
       "permanent": false
     }
   ]
