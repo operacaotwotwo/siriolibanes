@@ -1,20 +1,20 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/digital.faculdadesiriolibanes.org.br/$1"
-    },
-    {
       "source": "/medicina",
-      "destination": "/medicina.html"
+      "destination": "/digital.faculdadesiriolibanes.org.br/medicina.html"
     },
     {
       "source": "/profissionais",
-      "destination": "/profissionais.html"
+      "destination": "/digital.faculdadesiriolibanes.org.br/profissionais.html"
     },
     {
       "source": "/gestao",
-      "destination": "/gestao.html"
+      "destination": "/digital.faculdadesiriolibanes.org.br/gestao.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/digital.faculdadesiriolibanes.org.br/$1"
     }
   ]
 }
