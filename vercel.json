@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/digital.faculdadesiriolibanes.org.br/index-1.htm"
+      "source": "/(.*)",
+      "destination": "/digital.faculdadesiriolibanes.org.br/$1"
     },
     {
       "source": "/medicina",
@@ -15,12 +15,6 @@
     {
       "source": "/gestao",
       "destination": "/digital.faculdadesiriolibanes.org.br/gestao.html"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
     }
   ]
 }
