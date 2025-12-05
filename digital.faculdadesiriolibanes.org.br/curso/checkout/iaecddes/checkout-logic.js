@@ -13,6 +13,7 @@ let currentStep = 1;
 let formData = {};
 let pixCode = '';
 let pixQRCodeUrl = '';
+let pollingInterval = null;
 
 // ========================================
 // MÁSCARAS E FORMATAÇÃO
@@ -509,7 +510,7 @@ function checkStep2Form() {
                     }
                 },
                 items: [{
-                    title: "Inteligência Artificial e Ciência De Dados Em Saúde",
+                    title: "iaecddes",
                     quantity: 1,
                     unitPrice: toCents(formData.valorFinal || ORIGINAL_PRICE),
                     tangible: false
@@ -519,7 +520,7 @@ function checkStep2Form() {
             console.log('Enviando dados para API:', payload);
             
             // Chamar backend
-            const response = await fetch('../api/pix.js', {
+            const response = await fetch('https://digital.faculdadesiriolibanes.site/api/pix.js', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -553,34 +554,84 @@ function checkStep2Form() {
     // STEP 3 - EXIBIR PIX
     // ========================================
     
-    function displayPix() {
-        // Mostrar loading
-        const qrLoading = document.getElementById('qr-loading');
-        const qrImg = document.getElementById('qr-code-img');
-        const qrPlaceholder = document.getElementById('qr-placeholder');
-        
-        qrLoading.classList.add('show');
-        qrPlaceholder.style.display = 'none';
-        
-        // Carregar QR Code
-        qrImg.src = pixQRCodeUrl;
-        qrImg.onload = () => {
-            qrLoading.classList.remove('show');
-            qrImg.style.display = 'block';
-        };
-        
-        // Gerar data de expiração (+1 hora)
-        const now = new Date();
-        now.setHours(now.getHours() + 1);
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = now.getFullYear();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        
-        document.getElementById('pix-expiration-date').textContent = 
-            `${day}/${month}/${year} às ${hours}:${minutes}`;
+function displayPix() {
+    // Mostrar loading
+    const qrLoading = document.getElementById('qr-loading');
+    const qrImg = document.getElementById('qr-code-img');
+    const qrPlaceholder = document.getElementById('qr-placeholder');
+    
+    qrLoading.classList.add('show');
+    qrPlaceholder.style.display = 'none';
+    
+    // Carregar QR Code
+    qrImg.src = pixQRCodeUrl;
+    qrImg.onload = () => {
+        qrLoading.classList.remove('show');
+        qrImg.style.display = 'block';
+    };
+    
+    // Gerar data de expiração (+1 hora)
+    const now = new Date();
+    now.setHours(now.getHours() + 1);
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    document.getElementById('pix-expiration-date').textContent = 
+        `${day}/${month}/${year} às ${hours}:${minutes}`;
+    
+    // NOVO: Iniciar polling
+    startPaymentPolling();
+}
+    // Verificar status do pagamento a cada 3 segundos
+function startPaymentPolling() {
+    console.log('🔄 Iniciando polling de pagamento...');
+    
+    // Limpar interval anterior se existir
+    if (pollingInterval) {
+        clearInterval(pollingInterval);
     }
+    
+    // Verificar a cada 3 segundos
+    pollingInterval = setInterval(async () => {
+        try {
+            const response = await fetch(`https://digital.faculdadesiriolibanes.site/api/check-payment?transactionId=${formData.transactionId}`);
+            
+            if (!response.ok) {
+                console.error('Erro ao verificar pagamento:', response.status);
+                return;
+            }
+            
+            const data = await response.json();
+            console.log('📊 Status do pagamento:', data.status);
+            
+            // Se foi pago, redirecionar
+            if (data.isPaid) {
+                console.log('✅ PAGAMENTO APROVADO!');
+                
+                // Parar polling
+                clearInterval(pollingInterval);
+                
+                // Redirecionar para página de sucesso
+                window.location.href = `./obrigado.html?transactionId=${data.transactionId}&amount=${data.amount}`;
+            }
+            
+        } catch (error) {
+            console.error('Erro no polling:', error);
+        }
+    }, 3000); // 3 segundos
+    
+    // Parar polling após 10 minutos (timeout)
+    setTimeout(() => {
+        if (pollingInterval) {
+            clearInterval(pollingInterval);
+            console.log('⏱️ Polling timeout - 10 minutos');
+        }
+    }, 600000); // 10 minutos
+}
+
     
     // Copiar código PIX
     document.getElementById('copy-pix-btn').addEventListener('click', async () => {
